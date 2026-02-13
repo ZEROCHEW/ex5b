@@ -33,20 +33,24 @@
 	
 	<script>
 	    $(document).ready(function(){
-			$("button").click(function(){
-			   var t = Number($('#temp').val());//celsius
-			   var u = $('#unit').val();
-			   
-			   if(isNaN(t)){
+function validateT(t)
+{
+	            if(isNaN(t)){
 					msg = "Please verify whether the temperature value is correct!!!";
 					alert(msg);
-					return;
+					return false;
 			   }
 			   if(!(t >= -100 && t <= 100)){
 					msg = "Tempurature entered (in Celsius) must be between 0 and 100 C'";
 					alert(msg);
-					return;
+					return false;
 			   }
+			   return true;
+}
+
+			$("button").click(function(){
+			   var t = Number($('#temp').val());//celsius
+			   var u = $('#unit').val();
 			   
 			   var t1;
 			   var u1;
@@ -60,6 +64,10 @@
 			   }else if(u == "R"){
 					t1 = t * (4/5);
                     u1 = "Réaumur";
+			   }
+
+			   if(validateT(t) == false){
+                    return;
 			   }
 			   
 			   alert("Temperature is "+t1+" in "+u1);

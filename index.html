@@ -33,7 +33,7 @@
 	
 	<script>
 	    $(document).ready(function(){
-function validateT(t)
+function validateTemp(t)
 {
 	            if(isNaN(t)){
 					msg = "Please verify whether the temperature value is correct!!!";
@@ -46,6 +46,27 @@ function validateT(t)
 					return false;
 			   }
 			   return true;
+}
+function TempeConversion (t,u)
+{
+	           var t1;
+			   var u1;
+			   
+			   if(u == "F"){
+					t1 = t * (9/5) + 32;
+					u1 = "Fahrenheit";
+			   }else if(u == "K"){
+					t1 =  t + 273.15;
+					u1 = "Kelvin";
+			   }else if(u == "R"){
+					t1 = t * (4/5);
+                    u1 = "Réaumur";
+			   }
+			   return{
+				val: t1,
+                unit: u1
+			};
+
 }
 
 			$("button").click(function(){
@@ -66,9 +87,10 @@ function validateT(t)
                     u1 = "Réaumur";
 			   }
 
-			   if(validateT(t) == false){
+			   if(validateTemp(t) == false){
                     return;
 			   }
+			   var tc = TempeConversion(t,u);
 			   
 			   alert("Temperature is "+t1+" in "+u1);
 			});
